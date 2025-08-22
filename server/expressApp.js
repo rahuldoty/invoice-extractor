@@ -10,6 +10,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Lightweight health endpoint (no DB)
+app.get("/api/health", (req, res) => {
+  res.json({ ok: true, timestamp: Date.now() });
+});
+
 // Ensure DB is connected per request (lazy connect for serverless)
 app.use(async (req, res, next) => {
   try {
