@@ -2,9 +2,11 @@
   "version": 2,
   "builds": [
     { "src": "client/package.json", "use": "@vercel/static-build", "config": { "distDir": "dist" } },
-    { "src": "server/api/index.js", "use": "@vercel/node" }
+    { "src": "server/api/index.js", "use": "@vercel/node" },
+    { "src": "server/api/health.js", "use": "@vercel/node" }
   ],
   "routes": [
+    { "src": "/api/health", "dest": "/server/api/health.js" },
     { "src": "/api/(.*)", "dest": "/server/api/index.js" },
     { "src": "/(.*)", "dest": "/client/dist/index.html" }
   ]
